@@ -14,6 +14,6 @@ public class HealthTextUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		text.text = "Heath: " + HealthController.GetHealth()+"%";
+		text.text = "Suit Integrity : " + HealthController.GetHealth()+"%";
 	}
 }
