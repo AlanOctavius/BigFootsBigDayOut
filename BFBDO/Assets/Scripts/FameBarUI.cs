@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FameBarUI : MonoBehaviour {
 
-	public HealthyFameFame FameController;
+	public FameControllerScript FameController;
 
 	Image image;
 
