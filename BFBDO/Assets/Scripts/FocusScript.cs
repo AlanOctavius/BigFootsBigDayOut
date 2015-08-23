@@ -32,7 +32,7 @@ public class FocusScript : MonoBehaviour {
 		}
 		if (!frozen){
 			transform.localPosition = Vector2.Lerp(transform.localPosition,
-			                                       new Vector3(0,distance,0),
+			                                       new Vector3(-distance,0,0), // Works here, most likeyl correcting an error else where don't have time to find
 			                                       speed * Time.deltaTime);
 		}
 	}

@@ -8,6 +8,7 @@ public class PhotoAreaScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		photoScript = gameObject.GetComponentInParent<PhotoScript> ();
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame

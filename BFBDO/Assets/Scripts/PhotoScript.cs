@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PhotoScript : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class PhotoScript : MonoBehaviour {
 	private Transform photoTarget;
 
 
-
+	private float targetAngle;
 	public enum SearchStatus{NotSearching, Searching, ChaseingPlayer};
 
 	public SearchStatus searchStatus = SearchStatus.NotSearching;
@@ -18,12 +19,15 @@ public class PhotoScript : MonoBehaviour {
 	public float maxChaseTime = 5;
 	public float turnAngleShow;
 	public float rotationSpeed = 3;
+	public float movementSpeed = 2;
+	public float smallDistance = 2;
 	public float currentTime;
 	public float currentSearchTimeMax;
+	public float oscilationsPerSecond = 1;
 
-	public float direction;
-	public Vector3 Fromposition;
-	public Vector3 Topositoion;
+
+	private List<Transform> waypoints;
+	private int currentWaypointIndex;
 
 	private Quaternion initialRotation;
 
@@ -31,9 +35,34 @@ public class PhotoScript : MonoBehaviour {
 
 	void Start () {
 	
-		focusScript = transform.FindChild ("focus").gameObject.GetComponent<FocusScript>();
 		flashScript = transform.FindChild ("flash").gameObject.GetComponent<flashScript>();
 		photoArea = transform.FindChild ("photoArea").gameObject;
+		focusScript = photoArea.transform.FindChild ("focus").gameObject.GetComponent<FocusScript>();
+		Transform waypointHolder = GameObject.FindGameObjectWithTag ("waypoint").transform;
+
+		waypoints = new List<Transform> ();
+		foreach (Transform waypoint in waypointHolder){
+			waypoints.Add(waypoint);
+		}
+		//find nearest waypoint for inital placement
+		currentWaypointIndex = 0;
+		float currentSmallestDistance = Vector2.Distance((Vector2)transform.position, (Vector2) waypoints[currentWaypointIndex].position);
+
+		foreach (Transform waypoint in waypoints){
+
+			if (waypoint == waypoints[currentWaypointIndex]){continue;};
+
+			float distance = Vector2.Distance((Vector2)transform.position, (Vector2) waypoint.position);
+
+			if (distance > currentSmallestDistance){
+				continue;
+			}else{
+				currentSmallestDistance = distance;
+				currentWaypointIndex = waypoints.IndexOf(waypoint);
+
+			}
+
+		}
 
 
 		currentTime = 0;
@@ -79,10 +108,37 @@ public class PhotoScript : MonoBehaviour {
 
 	void NotSearchingUpdate(){
 		// Should put some movement before taking picture
-		float random = Random.value;
-		currentSearchTimeMax = averageSearchTimeRange * random + averageSearchTimeMin;
+		float distance = Vector2.Distance((Vector2)transform.position,
+		                                  (Vector2) waypoints[currentWaypointIndex].position);
+
+		if (distance <= smallDistance) {
+			//set random search time
+			float random = Random.value;
+			currentSearchTimeMax = averageSearchTimeRange * random + averageSearchTimeMin;
+
+			//get waypoint target
+			Vector3 targetPos = waypoints[currentWaypointIndex].FindChild("Target").position;
+
+
+			//rotate camera area to waypoint target
+			Vector3 vectorToTarget = transform.position - targetPos;
+			targetAngle = Mathf.Atan2 (vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg ;
+			photoArea.transform.rotation = Quaternion.AngleAxis (targetAngle, Vector3.forward);
+
+			changeStatusTo(SearchStatus.Searching);
+			if (currentWaypointIndex + 1 >= waypoints.Count){
+				currentWaypointIndex = 0;
+				waypoints.Reverse ();
+			}else{
+				currentWaypointIndex++;
+			}
+			return;
+		}
 		
-		changeStatusTo(SearchStatus.Searching);
+		transform.position = Vector3.MoveTowards (transform.position,
+		                                          waypoints [currentWaypointIndex].position,
+		                                          movementSpeed * Time.deltaTime);
+
 	}
 
 	void SearchUpdate(){
@@ -93,14 +149,11 @@ public class PhotoScript : MonoBehaviour {
 			//search has taken too long
 			changeStatusTo (SearchStatus.NotSearching);
 		}
+
 		
-		float normalisedTime = currentTime * 1;
-		
-		float turnAngle = Mathf.Sin (normalisedTime) * 45;
-		
-		turnAngleShow = turnAngle;
-		
-		transform.rotation = Quaternion.AngleAxis (turnAngle, Vector3.forward);
+		float turnAngle = Mathf.Sin (currentTime * oscilationsPerSecond) * 45;
+
+		photoArea.transform.rotation =  Quaternion.AngleAxis (targetAngle + turnAngle, Vector3.forward);
 	}
 
 	void ChaseUpdate(){
@@ -114,20 +167,21 @@ public class PhotoScript : MonoBehaviour {
 				changeStatusTo (SearchStatus.NotSearching);
 			}
 		} else {
-			Fromposition = transform.position;
-			Topositoion = photoTarget.position;
-			
-			Vector3 vectorToTarget = photoTarget.position - transform.position;
-			float angle = Mathf.Atan2 (vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-			
+
+			Vector3 vectorToTarget = transform.position - photoTarget.position ;
+			float angle = Mathf.Atan2 (vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg ;
+
 			//create the rotation we need to be in to look at the target
 			//Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.down);
 			
 			//rotate us over time according to speed until we are in the required rotation
-			transform.rotation = Quaternion.Slerp (transform.rotation,
+			photoArea.transform.rotation = Quaternion.Slerp (photoArea.transform.rotation,
 			                                       Quaternion.AngleAxis (angle, Vector3.forward),
 			                                       rotationSpeed * Time.deltaTime);
-			
+
+			//focusScript.gameObject.transform.RotateAround(transform.position,
+			//                                              Vector3.forward,
+			//                                              angle);
 			focusScript.SetTarget (((Vector2)vectorToTarget).magnitude);
 		}
 	}
