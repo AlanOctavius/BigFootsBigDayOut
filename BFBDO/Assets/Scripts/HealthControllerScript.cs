@@ -17,14 +17,16 @@ public class HealthControllerScript : MonoBehaviour {
 
 		SuitDamage (1);
 
-		if (HP <= 0) {
+		if (HP > 0) {
 			//HES DEAD JIM
 		}
 	
 	}
 
 	void SuitDamage(int damage) {
-		HP -= damage;
+		if (HP > 0) {
+			HP -= damage;
+		}
 	}
 
 	public float GetHealth(){
