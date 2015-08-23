@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: 6780eaefbf8d7f049b5355313b20241f
+timeCreated: 1440355116
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Walksprites_0
+    21300002: Walksprites_1
+    21300004: Walksprites_2
+    21300006: Walksprites_3
+    21300008: Walksprites_4
+    21300010: Walksprites_5
+    21300012: Walksprites_6
+    21300014: Walksprites_7
+    21300016: Walksprites_8
+    21300018: Walksprites_9
+    21300020: Walksprites_10
+    21300022: Walksprites_11
+    21300024: Walksprites_12
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Walksprites_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 709
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_1
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 709
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_2
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 709
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_3
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 709
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 355
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_5
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 355
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_6
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 355
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_7
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 355
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_8
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 355
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_10
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 1
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_11
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 1
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walksprites_12
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1
+        width: 236
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
