@@ -25,6 +25,11 @@ public class FocusScript : MonoBehaviour {
 		frozen = true;
 	}
 
+	public float PlayerDistance(Vector2 playerPosition){
+		//finds the distance between the focus logo and the player
+		return Vector2.Distance (playerPosition, (Vector2) transform.position);
+	}
+
 	// Update is called once per frame
 	void Update () {
 

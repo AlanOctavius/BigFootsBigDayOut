@@ -14,14 +14,14 @@ public class FameControllerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		IncreaseFame(1);
+		//IncreaseFame(1);
 
 		if (FP >= 100) {
 			//Hes Famous JIM
 		}
 	}
 
-	void IncreaseFame(int fame){
+	public void IncreaseFame(int fame){
 		FP += fame;
 	}
 

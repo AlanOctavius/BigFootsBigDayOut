@@ -4,6 +4,7 @@ using System.Collections;
 public class PhotoAreaScript : MonoBehaviour {
 
 	private PhotoScript photoScript;
+	public bool hasPlayer = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +20,10 @@ public class PhotoAreaScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Player") {
 			Transform photoTarget = other.gameObject.transform;
-			
-			photoScript.SetPhotoTarget(photoTarget);
+			hasPlayer = true;
+			photoScript.SetPhotoTarget (photoTarget);
+		} else {
+			hasPlayer = false;
 		}
 		
 	}

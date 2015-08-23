@@ -6,9 +6,11 @@ public class PhotoScript : MonoBehaviour {
 
 	private FocusScript focusScript;
 	private flashScript flashScript;
+	private PhotoAreaScript photoAreaScript;
 	private GameObject photoArea;
 	private Transform photoTarget;
-
+	private HealthControllerScript healthControllerScript;
+	private FameControllerScript fameControllerScript;
 
 	private float targetAngle;
 	public enum SearchStatus{NotSearching, Searching, ChaseingPlayer};
@@ -36,6 +38,8 @@ public class PhotoScript : MonoBehaviour {
 	private List<Transform> waypoints;
 	private int currentWaypointIndex;
 
+	private bool playerFlashed;
+
 	private Quaternion initialRotation;
 	private Transform oldTransform;
 	private Vector3 oldPosition;
@@ -44,8 +48,11 @@ public class PhotoScript : MonoBehaviour {
 
 	void Start () {
 	
+		healthControllerScript = GameObject.Find("HealthController").gameObject.GetComponent<HealthControllerScript> ();
+		fameControllerScript = GameObject.Find ("FameController").gameObject.GetComponent<FameControllerScript> ();
 		flashScript = transform.FindChild ("flash").gameObject.GetComponent<flashScript>();
 		photoArea = transform.FindChild ("photoArea").gameObject;
+		photoAreaScript = photoArea.GetComponent<PhotoAreaScript>();
 		focusScript = photoArea.transform.FindChild ("focus").gameObject.GetComponent<FocusScript>();
 		Transform waypointHolder = GameObject.FindGameObjectWithTag ("waypoint").transform;
 
@@ -217,8 +224,22 @@ public class PhotoScript : MonoBehaviour {
 			// Pause for PauseTime before flashing with the image.
 			focusScript.Freeze ();
 			flashScript.ActivateSelf ();
+			//Here!
+			if (photoAreaScript.hasPlayer && playerFlashed == false){
+				//Debug.Log("Photo has Sassy Ass");
+				float playerDistance = focusScript.PlayerDistance(photoTarget.position);
+				if (playerDistance < 2){
+					healthControllerScript.SuitDamage(20);
+				}else if ( playerDistance >2){
+					fameControllerScript.IncreaseFame(10);
+				}
+				playerFlashed = true;
+			}
+			//Here!
 			if (currentTime > maxChaseTime + flashScript.decayTime) {
 				changeStatusTo (SearchStatus.NotSearching);
+				playerFlashed = false;
+
 			}
 		} else {
 
