@@ -9,11 +9,11 @@ public class FocusScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.SetActive (false);
+		gameObject.SetActive(true);
 	}
 
-	public void SetActive(bool activeState){
-		gameObject.SetActive (activeState);
+	public void Activate(bool activeState){
+		gameObject.SetActive(activeState);
 		frozen = false;
 	}
 
@@ -27,9 +27,7 @@ public class FocusScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (gameObject.activeSelf){
 
-		}
 		if (!frozen){
 			transform.localPosition = Vector2.Lerp(transform.localPosition,
 			                                       new Vector3(-distance,0,0), // Works here, most likeyl correcting an error else where don't have time to find
