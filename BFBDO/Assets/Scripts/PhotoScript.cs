@@ -80,10 +80,10 @@ public class PhotoScript : MonoBehaviour {
 		}else if (newStatus == SearchStatus.NotSearching) {
 			photoArea.SetActive(false);
 		}else if (newStatus == SearchStatus.ChaseingPlayer) {
-			focusScript.SetActive(true);
+			focusScript.Activate(true);
 		}
 		if (newStatus != SearchStatus.ChaseingPlayer) {
-			focusScript.SetActive(false);
+			focusScript.Activate(false);
 		}
 	}
 
