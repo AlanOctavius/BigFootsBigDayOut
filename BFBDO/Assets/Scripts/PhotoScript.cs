@@ -28,6 +28,9 @@ public class PhotoScript : MonoBehaviour {
 	public float currentTime;
 	public float currentSearchTimeMax;
 	public float oscilationsPerSecond = 1;
+	public float focusDamageRadius = 1;
+	public int focusDamage = 20;
+	public int famePerPic = 20;
 
 	public float debugAngel;
 	public float debugAngel2;
@@ -228,10 +231,10 @@ public class PhotoScript : MonoBehaviour {
 			if (photoAreaScript.hasPlayer && playerFlashed == false){
 				//Debug.Log("Photo has Sassy Ass");
 				float playerDistance = focusScript.PlayerDistance(photoTarget.position);
-				if (playerDistance < 2){
-					healthControllerScript.SuitDamage(20);
-				}else if ( playerDistance >2){
-					fameControllerScript.IncreaseFame(10);
+				if (playerDistance < focusDamage){
+					healthControllerScript.SuitDamage(focusDamage);
+				}else if ( playerDistance > focusDamageRadius){
+					fameControllerScript.IncreaseFame(famePerPic);
 				}
 				playerFlashed = true;
 			}

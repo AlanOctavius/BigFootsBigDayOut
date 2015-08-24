@@ -3,6 +3,7 @@ using System.Collections;
 
 public class FameControllerScript : MonoBehaviour {
 
+	public ExitAreaScript exitAreaScript;
 	public int MaxFP = 100;
 
 	int FP;
@@ -17,7 +18,9 @@ public class FameControllerScript : MonoBehaviour {
 		//IncreaseFame(1);
 
 		if (FP >= 100) {
-			//Hes Famous JIM
+			if(exitAreaScript.notendgame){
+				exitAreaScript.EndGame(true);
+			}
 		}
 	}
 
